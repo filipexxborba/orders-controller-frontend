@@ -1,4 +1,3 @@
-
-export default function Home() {
+export default function Login() {
    return <main></main>;
 }
