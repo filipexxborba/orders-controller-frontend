@@ -10,8 +10,8 @@ module.exports = {
          colors: {
             primary: "#00703C",
             "primary-dark": "#085833",
-            neutral: "#FEFEFE",
-            "borders-neutral": "#DBDBDB",
+            neutral: "#F1F1F1",
+            "borders-neutral": "#F4F4F4",
          },
       },
    },
