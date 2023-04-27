@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import InputFieldset from "../InputFieldset";
 import ActionButton from "../ActionButton";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface LoginFormInputValues {
    email: string;
@@ -15,6 +15,31 @@ const LoginForm = () => {
       {} as LoginFormInputValues
    );
    const [isLoading, setIsLoading] = useState<boolean>(false);
+   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+   const router = useRouter();
+
+   const handleLoginFormSubmit = async () => {
+      setErrorMessage(null);
+      setIsLoading(true);
+      const response = await fetch("/api/auth", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+            email: formValues.email.toLowerCase(),
+            password: formValues.password,
+         }),
+      });
+
+      const { data } = await response.json();
+      if (data.error) setErrorMessage("Usuário ou senha inválidos");
+      else {
+         router.push("/home");
+      }
+      setIsLoading(false);
+   };
 
    return (
       <form className="flex flex-col gap-6">
@@ -36,20 +61,20 @@ const LoginForm = () => {
          />
          <ActionButton
             title="Entrar"
-            onClick={() => {}}
+            onClick={() => handleLoginFormSubmit()}
             disabled={!formValues.email || !formValues.password}
             loadingState={isLoading}
          />
+         {errorMessage && (
+            <p className="text-sm text-red-500">{errorMessage}</p>
+         )}
          <div className="flex items-center gap-2">
             <span className="flex-1 block border-b border-b-borders-neutral" />
             <p className="text-gray-300">ou</p>
             <span className="flex-1 block border-b border-b-borders-neutral" />
          </div>
          <Link href="/forgot-password">
-            <ActionButton
-               title="Esqueci minha senha"
-               type="secondary"
-            />
+            <ActionButton title="Esqueci minha senha" type="secondary" />
          </Link>
       </form>
    );
