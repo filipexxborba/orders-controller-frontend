@@ -18,3 +18,14 @@ export async function POST(request: NextRequest) {
       );
    } else return NextResponse.json(data);
 }
+
+export async function DELETE(_request: NextRequest) {
+   return NextResponse.json(
+      { data: await authService.logout() },
+      {
+         headers: {
+            "Set-Cookie": `jwt-orders-auth-token=0; Path=/; SameSite=Strict; Max-Age=0; jwt-orders-auth-refresh-token=0; Path=/; SameSite=Strict; Max-Age=0`,
+         },
+      }
+   );
+}

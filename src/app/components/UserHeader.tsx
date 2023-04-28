@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useUserContext } from "../context/UserContext";
 import RoleComponent from "./RoleComponent";
+import { UserRole } from "@/@types/UserRole";
 
 const UserHeader = () => {
    const { user } = useUserContext();
@@ -17,7 +18,7 @@ const UserHeader = () => {
             />
             <div className="flex flex-col items-start gap-2">
                <h3 className="text-2xl font-medium text-gray-800">
-                  {user?.name || 'Usuário desconhecido'}
+                  {user?.name || "Usuário desconhecido"}
                </h3>
                <div className="flex items-center gap-2 ">
                   {user?.isActive || true ? (
@@ -32,7 +33,7 @@ const UserHeader = () => {
                      </>
                   )}
                </div>
-               <RoleComponent role={user?.role || 'user'} />
+               <RoleComponent role={user ? user?.role : UserRole.USER} />
             </div>
          </div>
       </section>

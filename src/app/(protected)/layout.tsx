@@ -1,6 +1,5 @@
 "use client";
 import AsideMenu from "../components/AsideMenu";
-import { UserContextProvider } from "../context/UserContext";
 
 export default function ProtectedRoutesLayout({
    children,

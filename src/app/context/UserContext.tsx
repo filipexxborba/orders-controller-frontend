@@ -1,3 +1,4 @@
+"use client";
 import { CostCenter } from "@/@types/CostCenter";
 import { UserRole } from "@/@types/UserRole";
 import { createContext, useContext, useState } from "react";
@@ -7,7 +8,7 @@ export type UserType = {
    email: string;
    password: string;
    role: UserRole;
-   costCenter: CostCenter
+   costCenter: CostCenter;
    imageUri: string;
    createdAt: Date;
    updatedAt: Date;
@@ -17,17 +18,17 @@ export type UserType = {
 };
 
 export type UserContextType = {
-   user: UserType;
-   setUser: React.Dispatch<React.SetStateAction<UserType>>;
+   user: UserType | null;
+   setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 };
 
 interface IUserContextProvider {
-   children: React.ReactElement | React.ReactElement[];
+   children: React.ReactElement | React.ReactElement[] | React.ReactNode;
 }
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 const UserContextProvider = ({ children }: IUserContextProvider) => {
-   const [user, setUser] = useState<UserType>({} as UserType);
+   const [user, setUser] = useState<UserType | null>({} as UserType);
    return (
       <UserContext.Provider value={{ user, setUser }}>
          {children}

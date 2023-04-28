@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import InputFieldset from "../InputFieldset";
 import ActionButton from "../ActionButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/app/context/UserContext";
 
 interface LoginFormInputValues {
    email: string;
@@ -16,7 +17,7 @@ const LoginForm = () => {
    );
    const [isLoading, setIsLoading] = useState<boolean>(false);
    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+   const { setUser, user } = useContext(UserContext);
    const router = useRouter();
 
    const handleLoginFormSubmit = async () => {
@@ -36,6 +37,7 @@ const LoginForm = () => {
       const { data } = await response.json();
       if (data.error) setErrorMessage("Usuário ou senha inválidos");
       else {
+         setUser(data.user);
          router.push("/home");
       }
       setIsLoading(false);

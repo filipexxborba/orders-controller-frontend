@@ -1,8 +1,20 @@
+"use client";
 import { LogOut, User } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useUserContext } from "../context/UserContext";
+import { useRouter } from "next/navigation";
 const UserAsideMenu = () => {
    const [isShowingPopover, setIsShowingPopover] = useState<boolean>(false);
+   const { user, setUser } = useUserContext();
+   const router = useRouter();
+
+   const handleLogoutButton = async () => {
+      const response = await fetch("/api/auth", { method: "DELETE" });
+      const { data } = await response.json();
+      setUser(null);
+      router.push("/");
+   };
    return (
       <div className="relative">
          <div
@@ -10,7 +22,7 @@ const UserAsideMenu = () => {
             onClick={() => setIsShowingPopover(!isShowingPopover)}
          >
             <Image
-               src="https://media.licdn.com/dms/image/C4D03AQHuU-PHI8P5LQ/profile-displayphoto-shrink_200_200/0/1567085496880?e=1687996800&v=beta&t=hYjAev7b6cKer5H9CpqIbWEIglwpwPFH-Hc6R1ZACwk"
+               src={user?.imageUri || "/no-image-avatar.png"}
                alt="teste"
                width={48}
                height={48}
@@ -25,11 +37,17 @@ const UserAsideMenu = () => {
             } absolute left-12 -top-[110px] bg-white rounded-md shadow-lg py-2 transition-all ease-in-out popover flex flex-col border border-borders-neutral/30 z-50`}
             onMouseLeave={() => setIsShowingPopover(false)}
          >
-            <div className="flex items-center gap-2 px-4 py-2 font-normal cursor-pointer text-slate-500 hover:bg-gray-50">
+            <div
+               className="flex items-center gap-2 px-4 py-2 font-normal cursor-pointer text-slate-500 hover:bg-gray-50"
+               onClick={() => router.push("/profile")}
+            >
                <User size={18} className="text-primary" />
                <h3 className="min-w-[10ch]">Meu perfil</h3>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 font-normal cursor-pointer text-slate-500 hover:bg-gray-50">
+            <div
+               className="flex items-center gap-2 px-4 py-2 font-normal cursor-pointer text-slate-500 hover:bg-gray-50"
+               onClick={() => handleLogoutButton()}
+            >
                <LogOut size={18} className="text-primary" />
                <h3>Sair</h3>
             </div>

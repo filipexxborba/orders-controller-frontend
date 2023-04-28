@@ -42,8 +42,9 @@ const UserPersonalInformations = () => {
                   Última atualização de perfil
                </h3>
                <p>
-                  {new Date(user?.updatedAt).toLocaleDateString("pt-br") ||
-                     "Não informado"}
+                  {user
+                     ? new Date(user?.updatedAt).toLocaleDateString("pt-br")
+                     : "Não informado"}
                </p>
             </div>
          </div>

@@ -1,3 +1,4 @@
+import { UserContextProvider } from "./context/UserContext";
 import "./globals.css";
 
 export const metadata = {
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
    return (
       <html lang="pt-br">
-         <body className="bg-[#FEFEFE]">{children}</body>
+         <body className="bg-[#FEFEFE]">
+            <UserContextProvider>{children}</UserContextProvider>
+         </body>
       </html>
    );
 }
