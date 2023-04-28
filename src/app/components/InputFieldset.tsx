@@ -25,7 +25,7 @@ const InputFieldset = ({
    const VisibilityComponent = () => {
       return (
          <div
-            className="absolute right-0 flex items-center justify-center h-[90%] pl-1 pr-2 mr-[2px] -translate-y-1/2 text-borders-neutral top-1/2 bg-neutral"
+            className="absolute right-0 flex items-center justify-center h-[90%] pl-1 pr-2 mr-[2px] -translate-y-1/2 text-borders-neutral top-1/2 bg-white cursor-pointer"
             onClick={() => setIsShowingPassword(!isShowingPassword)}
          >
             {isShowingPassword ? <Eye /> : <EyeOff />}

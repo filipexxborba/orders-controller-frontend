@@ -8,7 +8,7 @@ export default function ProtectedRoutesLayout({
    children: React.ReactNode;
 }) {
    return (
-      <section className="grid grid-cols-[100px_1fr] h-[100vh] bg-red-neutral">
+      <section className="grid grid-cols-[100px_1fr] h-[100vh] bg-neutral">
          <AsideMenu />
          {children}
       </section>

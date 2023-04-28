@@ -1,3 +1,4 @@
+import { CostCenter } from "@/@types/CostCenter";
 import { UserRole } from "@/@types/UserRole";
 import { createContext, useContext, useState } from "react";
 
@@ -6,6 +7,7 @@ export type UserType = {
    email: string;
    password: string;
    role: UserRole;
+   costCenter: CostCenter
    imageUri: string;
    createdAt: Date;
    updatedAt: Date;

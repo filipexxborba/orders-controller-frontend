@@ -18,12 +18,11 @@ const UserAsideMenu = () => {
             />
          </div>
          <nav
-            // className={`${isShowingPopover ? "visible" : "invisible" } absolute left-12 -top-16 bg-white rounded-md shadow-md py-2 popover`}
             className={`${
                !isShowingPopover
                   ? "opacity-0 translate-y-4"
                   : "opacity-100 translate-y-0"
-            } absolute left-12 -top-[110px] bg-white rounded-md shadow-lg py-2 transition-all ease-in-out popover flex flex-col border border-borders-neutral/30`}
+            } absolute left-12 -top-[110px] bg-white rounded-md shadow-lg py-2 transition-all ease-in-out popover flex flex-col border border-borders-neutral/30 z-50`}
             onMouseLeave={() => setIsShowingPopover(false)}
          >
             <div className="flex items-center gap-2 px-4 py-2 font-normal cursor-pointer text-slate-500 hover:bg-gray-50">
