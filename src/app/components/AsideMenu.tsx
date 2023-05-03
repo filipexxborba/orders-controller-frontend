@@ -1,38 +1,44 @@
 "use client";
-import { HomeIcon, ShoppingCart, User } from "lucide-react";
+import { HomeIcon, PackagePlus, Plus, ShoppingBagIcon, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import AsideMenuItem from "./AsideMenuItem";
 import { useEffect, useState } from "react";
 import UserAsideMenu from "./UserAsideMenu";
+import { usePathname } from "next/navigation";
 
 const AsideMenu = () => {
    const [currentPage, setCurrentPage] = useState<string>("/home");
+   const current = usePathname();
 
    const routes = [
       {
-         title: "Home",
-         href: "/home",
-         icon: <HomeIcon size={24} />,
+         title: "Novo pedido",
+         href: "/orders/new",
+         icon: <PackagePlus size={24} />,
       },
       {
          title: "Pedidos",
          href: "/orders",
-         icon: <ShoppingCart size={24} />,
+         icon: <ShoppingBagIcon size={24} />,
       },
       {
          title: "Perfil",
          href: "/profile",
          icon: <User size={24} />,
       },
+      {
+         title: "Home",
+         href: "/home",
+         icon: <HomeIcon size={24} />,
+      },
    ];
 
    useEffect(() => {
-      setCurrentPage(window.location.pathname);
-      console.log(currentPage);
-   }, []);
+      setCurrentPage(current);
+   }, [current]);
 
    return (
-      <div className="relative flex flex-col items-center h-full gap-4 bg-white shadow-md">
+      <div className="fixed top-0 left-0 flex flex-col items-center h-full gap-4 bg-white shadow-md">
          <div className="flex items-center justify-center w-full py-5">
             <Image
                src="/tecnomyl-logo-t-colored.png"

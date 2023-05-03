@@ -21,7 +21,7 @@ const AsideMenuItem = ({
       <div
          data-tooltip-id={title}
          data-tooltip-content={title}
-         className={`relative flex items-center justify-center w-full py-4`}
+         className={`relative flex items-center justify-center w-full py-4 px-8`}
       >
          <Link
             href={href}

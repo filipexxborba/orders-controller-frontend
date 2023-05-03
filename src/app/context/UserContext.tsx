@@ -1,21 +1,6 @@
 "use client";
-import { CostCenter } from "@/@types/CostCenter";
-import { UserRole } from "@/@types/UserRole";
+import { UserType } from "@/@types/User";
 import { createContext, useContext, useState } from "react";
-
-export type UserType = {
-   name: string;
-   email: string;
-   password: string;
-   role: UserRole;
-   costCenter: CostCenter;
-   imageUri: string;
-   createdAt: Date;
-   updatedAt: Date;
-   isActive: boolean;
-   refreshToken: string;
-   refreshTokenExpiresAt: Date;
-};
 
 export type UserContextType = {
    user: UserType | null;
